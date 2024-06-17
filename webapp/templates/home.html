@@ -1,0 +1,147 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Web App</title>
+    <script>
+        function onClick(buttonId) {
+            var buttons = document.querySelectorAll('.button');
+            buttons.forEach(function (button) {
+                button.classList.remove('active');
+            });
+            var button = document.getElementById(buttonId);
+            // button.classList.add('active');
+
+            if (buttonId === 'button1' || buttonId === 'button3') {
+                button.classList.add('active');
+                setTimeout(function () {
+                    button.classList.remove('active');
+                }, 3000);
+            } else {
+                button.classList.add('active');
+                setTimeout(function () {
+                    button.classList.remove('active');
+                }, 6000);
+            }
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("POST", "/button-clicked", true);
+            xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhttp.send(JSON.stringify({ button: buttonId }));
+        }
+    </script>    
+    <style>
+        .button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 165px;
+            height: 125px;
+            background-color: #e6e6e6;
+            border-radius: 10px;
+            margin: 10px;
+            text-align: center;
+            font-size: 30px;
+        }
+
+        .stop_button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 250px;
+            height: 150px;
+            background-color: #ff0000;
+            border-radius: 10px;
+            margin: 10px;
+            text-align: center;
+            font-size: 45px;
+            color: #ffffff
+        }
+
+        .stop_container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 20vh; /* sets the height of the container to the full height of the viewport */
+        }
+
+
+        .button.active  {
+            background-color: #21e031;
+        }
+
+        .button-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            height: 45%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin-bottom: 20px;
+        }
+
+        body {
+            margin: 0;
+            padding: 80px 0 0 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .title {
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            font-size: 40px;
+            color: #333;
+        }
+
+        .battery {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 30px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="battery">
+        BATTERY HEALTH: HIGH
+    </div>
+    <h1 class="title">B.A.R.E. Bike</h1>
+    </div>
+    <div class="stop_container">
+        <div class="stop_button" id="button5" onclick="onClick('button5')">
+            STOP MOTOR
+        </div>
+    </div>
+    <div class="button-grid">
+      <div class="button" id="button1" onclick="onClick('button1')">
+        Burst
+      </div>
+      <div class="button" id="button2" onclick="onClick('button2')">
+        Burst++
+      </div>
+      <div class="button" id="button3" onclick="onClick('button3')">
+        Uphill Burst
+      </div>
+      <div class="button" id="button4" onclick="onClick('button4')">
+        Uphill Burst++
+      </div>
+    </div>
+  </body>
+</html>

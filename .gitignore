@@ -1,0 +1,7 @@
+#Specific
+/bin
+/build
+
+*.iml
+.idea
+/cmake-build-debug/
